@@ -82,6 +82,12 @@ file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/debug/share)
 file(GLOB REL_CFGS ${CURRENT_PACKAGES_DIR}/bin/*.cfg)
 file(COPY ${REL_CFGS} DESTINATION ${CURRENT_PACKAGES_DIR}/lib)
 
+# TODO file(GLOB DBG_CFGS ${CURRENT_PACKAGES_DIR}/debug/bin/*.cfg)
+# TODO file(COPY ${DBG_CFGS} DESTINATION ${CURRENT_PACKAGES_DIR}/debug/lib)
+
+# TODO file(REMOVE ${REL_CFGS} ${DBG_CFGS})
+# file(REMOVE ${REL_CFGS})
+
 if(VCPKG_LIBRARY_LINKAGE STREQUAL "static")
     file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/bin ${CURRENT_PACKAGES_DIR}/debug/bin)
 endif()
@@ -102,20 +108,35 @@ foreach(SHARE_FILE ${SHARE_FILES})
   string(REPLACE "PATH_SUFFIXES \"OGRE\"" "PATH_SUFFIXES \"OGRE-2.1\"" _contents "${_contents}")
   string(REPLACE "add_parent_dir(OGRE_INCLUDE_DIRS OGRE_INCLUDE_DIR)" "" _contents "${_contents}")
   # vcpkg uses manual-link directory to place OgreMain 
-  string(REPLACE "set(OGRE_LIB_SEARCH_PATH \${dir}/lib" "set(OGRE_LIB_SEARCH_PATH \${dir}/lib/manual-link" _contents "${_contents}")
+  string(REPLACE "set(OGRE_LIB_SEARCH_PATH \${dir}/lib" "set(OGRE_LIB_SEARCH_PATH \${dir}/lib/OGRE-2.1/manual-link" _contents "${_contents}")
+  string(REPLACE "PATH_SUFFIXES \"\" \"Release\" \"RelWithDebInfo\" \"MinSizeRel\"" "NO_DEFAULT_PATH" _contents "${_contents}")
+  string(REPLACE "PATH_SUFFIXES \"\" \"Debug\"" "NO_DEFAULT_PATH" _contents "${_contents}")
   # Missing subdirectory for Overlay
   string(REPLACE "Overlay OgreOverlaySystem.h \"\"" "Overlay OgreOverlaySystem.h \"Overlay\"" _contents "${_contents}")
   # Adjust library dirs to OGRE-2.1 and manual-link path origin
-  string(REPLACE "get_filename_component(OGRE_LIBRARY_DIR_REL \"\${OGRE_LIBRARY_REL}\" PATH)"
-                 "get_filename_component(OGRE_LIBRARY_DIR_REL \"\${OGRE_LIBRARY_REL}\" PATH)\nset(OGRE_LIBRARY_DIR_REL \"\${OGRE_LIBRARY_DIR_REL}/../OGRE-2.1/Release\")"
-	         _contents "${_contents}")
-  string(REPLACE "get_filename_component(OGRE_LIBRARY_DIR_DBG \"\${OGRE_LIBRARY_DBG}\" PATH)"
-                 "get_filename_component(OGRE_LIBRARY_DIR_DBG \"\${OGRE_LIBRARY_DBG}\" PATH)\nset(OGRE_LIBRARY_DIR_DBG \"\${OGRE_LIBRARY_DIR_REL}/../OGRE-2.1/Debug\")"
-	         _contents "${_contents}")
+  string(REPLACE "\${COMPONENT} OGRE/\${COMPONENT}" "\${COMPONENT} OGRE-2.1/\${COMPONENT}" _contents "${_contents}")
+  string(REPLACE "HINTS \${OGRE_LIBRARY_DIR_REL}" "HINTS \${OGRE_LIBRARY_DIR_REL}/../"  _contents "${_contents}" )
   # Remove reference to Samples, disabled at configure time
   string(REPLACE "set(OGRE_INCLUDE_DIRS \${OGRE_INCLUDE_DIRS} \"\${OGRE_SOURCE}/Samples/Common/include\")" "" _contents "${_contents}")
   file(WRITE "${SHARE_FILE}" "${_contents}")
 endforeach()
+
+# Copy dlls
+file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/bin/OGRE-2.1)
+file(GLOB MAIN_REL ${CURRENT_PACKAGES_DIR}/bin/Release/*)
+file(COPY ${MAIN_REL} DESTINATION ${CURRENT_PACKAGES_DIR}/bin/OGRE-2.1/)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/bin/Release/)
+
+# Copy OgreMain.lib to manual-link
+file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/manual-link)
+file(GLOB MAIN_LIB_REL ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/Release/OgreMain.lib)
+file(COPY ${MAIN_LIB_REL} DESTINATION ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/manual-link)
+file(REMOVE ${MAIN_LIB_REL})
+
+# Copy all .lib files to
+file(GLOB LIBS_REL DESTINATION ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/Release/*)
+file(COPY ${LIBS_REL} DESTINATION ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/Release/)
 
 # Handle copyright
 file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/ogre2 RENAME copyright)
