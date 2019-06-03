@@ -116,6 +116,7 @@ foreach(SHARE_FILE ${SHARE_FILES})
   # Adjust library dirs to OGRE-2.1 and manual-link path origin
   string(REPLACE "\${COMPONENT} OGRE/\${COMPONENT}" "\${COMPONENT} OGRE-2.1/\${COMPONENT}" _contents "${_contents}")
   string(REPLACE "HINTS \${OGRE_LIBRARY_DIR_REL}" "HINTS \${OGRE_LIBRARY_DIR_REL}/../"  _contents "${_contents}" )
+  string(REPLACE "HINTS \${OGRE_LIBRARY_DIR_DBG}" "HINTS \${OGRE_LIBRARY_DIR_DBG}/../"  _contents "${_contents}" )
   # Remove reference to Samples, disabled at configure time
   string(REPLACE "set(OGRE_INCLUDE_DIRS \${OGRE_INCLUDE_DIRS} \"\${OGRE_SOURCE}/Samples/Common/include\")" "" _contents "${_contents}")
   file(WRITE "${SHARE_FILE}" "${_contents}")
@@ -123,18 +124,18 @@ endforeach()
 
 # Copy dlls
 file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/bin/OGRE-2.1)
-file(GLOB MAIN_REL ${CURRENT_PACKAGES_DIR}/bin/Release/*)
+file(GLOB MAIN_REL ${CURRENT_PACKAGES_DIR}/bin/Release/* ${CURRENT_PACKAGES_DIR}/bin/Debug/*)
 file(COPY ${MAIN_REL} DESTINATION ${CURRENT_PACKAGES_DIR}/bin/OGRE-2.1/)
-file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/bin/Release/)
+file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/bin/Release/  ${CURRENT_PACKAGES_DIR}/bin/Debug/)
 
 # Copy OgreMain.lib to manual-link
 file(MAKE_DIRECTORY ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/manual-link)
-file(GLOB MAIN_LIB_REL ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/Release/OgreMain.lib)
+file(GLOB MAIN_LIB_REL ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/Release/OgreMain.lib ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/Debug/OgreMain*.lib)
 file(COPY ${MAIN_LIB_REL} DESTINATION ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/manual-link)
 file(REMOVE ${MAIN_LIB_REL})
 
 # Copy all .lib files to
-file(GLOB LIBS_REL DESTINATION ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/Release/*)
+file(GLOB LIBS_REL DESTINATION ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/Release/* ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/Debug/*)
 file(COPY ${LIBS_REL} DESTINATION ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.1/Release/)
 
