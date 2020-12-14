@@ -12,7 +12,7 @@ vcpkg_download_distfile(
     ARCHIVE
     URLS "http://download.icu-project.org/files/icu4c/${VERSION}/icu4c-${VERSION2}-src.tgz"
     FILENAME "icu4c-${VERSION2}-src.tgz"
-    SHA512 4c37691246db802e4bae0c8c5f6ac1dac64c5753b607e539c5c1c36e361fcd9dd81bd1d3b5416c2960153b83700ccdb356412847d0506ab7782ae626ac0ffb94
+    SHA512 300c2fb3b5d490b5eef836a14d73dd0036feda18fee3f1716076adf78b579b35d72a0d23336c110055448d31c5580517da3846f8c61a3bfc31544fe749b98089
 )
 vcpkg_extract_source_archive_ex(
     OUT_SOURCE_PATH SOURCE_PATH
