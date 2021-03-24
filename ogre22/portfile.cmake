@@ -97,13 +97,13 @@ if(VCPKG_LIBRARY_LINKAGE STREQUAL "static")
 endif()
 
 file(RENAME ${CURRENT_PACKAGES_DIR}/include/OGRE ${CURRENT_PACKAGES_DIR}/include/OGRE-2.2)
-file(RENAME ${CURRENT_PACKAGES_DIR}/share/ogre2/FindOGRE.cmake ${CURRENT_PACKAGES_DIR}/share/ogre2/OGRE2Config.cmake)
+file(RENAME ${CURRENT_PACKAGES_DIR}/share/ogre22/FindOGRE.cmake ${CURRENT_PACKAGES_DIR}/share/ogre22/OGRE2Config.cmake)
 
-file(GLOB SHARE_FILES ${CURRENT_PACKAGES_DIR}/share/ogre2/*.cmake)
+file(GLOB SHARE_FILES ${CURRENT_PACKAGES_DIR}/share/ogre22/*.cmake)
 foreach(SHARE_FILE ${SHARE_FILES})
   file(READ "${SHARE_FILE}" _contents)
   # Find modules in vcpkg share
-  string(REPLACE "include(FindPkgMacros)" "set (CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH};${CURRENT_INSTALLED_DIR}/share/ogre2)\ninclude(FindPkgMacros)" _contents "${_contents}")
+  string(REPLACE "include(FindPkgMacros)" "set (CMAKE_MODULE_PATH \${CMAKE_MODULE_PATH};${CURRENT_INSTALLED_DIR}/share/ogre22)\ninclude(FindPkgMacros)" _contents "${_contents}")
   # Overwrite enviroment paths by vcpkg CURRENT_PACKAGES_DIR
   string(REPLACE "getenv_path(OGRE_SOURCE)" "set(OGRE_SOURCE ${CURRENT_INSTALLED_DIR})" _contents "${_contents}")
   string(REPLACE "getenv_path(OGRE_BUILD)" "set(OGRE_BUILD \${OGRE_SOURCE})" _contents "${_contents}")
@@ -144,7 +144,7 @@ file(COPY ${LIBS_REL} DESTINATION ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.2)
 file(REMOVE_RECURSE ${CURRENT_PACKAGES_DIR}/lib/OGRE-2.2/Release/)
 
 # Handle copyright
-file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/ogre2 RENAME copyright)
+file(INSTALL ${SOURCE_PATH}/COPYING DESTINATION ${CURRENT_PACKAGES_DIR}/share/ogre22 RENAME copyright)
 
 vcpkg_copy_pdbs()
 
