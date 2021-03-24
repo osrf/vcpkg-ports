@@ -8,9 +8,9 @@ include(vcpkg_common_functions)
 # REF 06a386fa64e7
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO osrf/ogre-2.2-release
+    REPO ignition-forks/ogre-2.2-release
     REF upstream/2.2.9999_20210319_3aa42f
-    SHA512 
+    SHA512 a508a4578cc6195064ba98429dc96367f2598643aaaa1de99379f73fd0034bba4a55fc2380d39579e8ed0f6b624286c2e735372e114e162aa0846f997d6769a1
 )
 
 message(STATUS "SOURCE PATH: ${SOURCE_PATH}")
