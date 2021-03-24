@@ -19,6 +19,7 @@ vcpkg_apply_patches(
     SOURCE_PATH ${SOURCE_PATH}
     PATCHES
         "${CMAKE_CURRENT_LIST_DIR}/001-cmake-install-dir.patch"
+        "${CMAKE_CURRENT_LIST_DIR}/002-no-samples.patch"
 )
 
 if (VCPKG_LIBRARY_LINKAGE STREQUAL static)
