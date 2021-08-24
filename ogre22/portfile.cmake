@@ -9,8 +9,8 @@ include(vcpkg_common_functions)
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO ignition-forks/ogre-2.2-release
-    REF upstream/2.2.9999_20210319_3aa42f
-    SHA512 a508a4578cc6195064ba98429dc96367f2598643aaaa1de99379f73fd0034bba4a55fc2380d39579e8ed0f6b624286c2e735372e114e162aa0846f997d6769a1
+    REF upstream/2.2.5+20210824_ec3f70c
+    SHA512 f3e93023e1287504088d5aff2a5734cf4f28553db82c4c3bf93db127f9e8fe25aabf8dc80486d2e00fe38ad58ac9cac687df8ea7502f2e9700df5dab08069fb2
 )
 
 message(STATUS "SOURCE PATH: ${SOURCE_PATH}")
