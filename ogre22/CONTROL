@@ -1,6 +1,6 @@
 Source: ogre22
 Version: 2.1.9999~20210319~3aa42f
-Build-Depends: freeimage, freetype, zlib, zziplib
+Build-Depends: freeimage, freetype, rapidjson, zlib, zziplib
 Description: 3D Object-Oriented Graphics Rendering Engine
 
 Feature: d3d9
