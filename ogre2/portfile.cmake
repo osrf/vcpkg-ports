@@ -8,7 +8,7 @@ include(vcpkg_common_functions)
 # REF 06a386fa64e7
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
-    REPO osrf/ogre-2.1-release
+    REPO gazebo-forks/ogre-2.1-release
     REF 71fbebdb3e953d0e77e8dc62e96d39d8a86cf19d
     SHA512 c651bcdd4886af30cca8fd848a64bf14bcc8e87c085ada8373ad3b10d091c00041f816fb3db375af6729e00e2a6ed22c70721c3e27e028c6a48fbc1b79b29acd
 )
