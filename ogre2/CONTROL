@@ -1,5 +1,5 @@
 Source: ogre2
-Version: 2.1.9999~20210410~71fbebd
+Version: 2.0.9999~20210410~71fbebd
 Build-Depends: freeimage, freetype, zlib, zziplib
 Description: 3D Object-Oriented Graphics Rendering Engine
 
