@@ -1,4 +1,3 @@
-# Shared library support is broken upstream (https://github.com/dartsim/dart/issues/1005#issuecomment-375406260)
 vcpkg_check_linkage(ONLY_STATIC_LIBRARY)
 
 vcpkg_from_github(
@@ -9,6 +8,7 @@ vcpkg_from_github(
     HEAD_REF main
     PATCHES
         disable_unit_tests_examples_and_tutorials.patch
+        fix_msvc2022_compilation.patch
 )
 
 vcpkg_cmake_configure(

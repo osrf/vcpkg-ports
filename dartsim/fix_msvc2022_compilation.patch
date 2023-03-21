@@ -1,0 +1,27 @@
+Title: Fix compilation with MSVC 2022
+Source: Michael Carroll <mjcarroll@intrinsic.ai>
+Description: Patch type to make MSVC2022 to be able to compile
+
+---
+diff --git a/dart/common/detail/Signal.hpp b/dart/common/detail/Signal.hpp
+index b7a6744d8ed1..844952e27bdd 100644
+--- a/dart/common/detail/Signal.hpp
++++ b/dart/common/detail/Signal.hpp
+@@ -84,7 +84,7 @@ void Signal<_Res(_ArgTypes...), Combiner>::disconnect(
+ //==============================================================================
+ template <typename _Res, typename... _ArgTypes, template <class> class Combiner>
+ void Signal<_Res(_ArgTypes...), Combiner>::disconnect(
+-    const std::shared_ptr<Signal::ConnectionBodyType>& connectionBody)
++    const std::shared_ptr<ConnectionBodyType>& connectionBody)
+ {
+   mConnectionBodies.erase(connectionBody);
+ }
+@@ -179,7 +179,7 @@ void Signal<void(_ArgTypes...)>::disconnect(const Connection& connection) const
+ //==============================================================================
+ template <typename... _ArgTypes>
+ void Signal<void(_ArgTypes...)>::disconnect(
+-    const std::shared_ptr<Signal::ConnectionBodyType>& connectionBody)
++    const std::shared_ptr<ConnectionBodyType>& connectionBody)
+ {
+   mConnectionBodies.erase(connectionBody);
+ }
