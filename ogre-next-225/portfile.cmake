@@ -10,8 +10,8 @@ endif()
 vcpkg_from_github(
     OUT_SOURCE_PATH SOURCE_PATH
     REPO OGRECave/ogre-next
-    REF e4c5f0f6d36c07af594e3ef143d017bda1581442 #v2.3.1
-    SHA512 263a50b64defa7345a109a068cc17c347a696f83f64abc071256bb46571ed6b2ef94ee3480d90938cdb7f745d36a4c4890d82677d357c62c9a2956eae8d4ac15
+    REF e4c5f0f6d36c07af594e3ef143d017bda1581442  #v2.2.5
+    SHA512 f3e93023e1287504088d5aff2a5734cf4f28553db82c4c3bf93db127f9e8fe25aabf8dc80486d2e00fe38ad58ac9cac687df8ea7502f2e9700df5dab08069fb2
     HEAD_REF master
     PATCHES
         toolchain_fixes.patch
