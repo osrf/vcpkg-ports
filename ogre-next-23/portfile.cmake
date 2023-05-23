@@ -1,5 +1,6 @@
 # This portfile is based (shamelessly copied and adapted a bit) on 'ogre' portfile.
 if (EXISTS "${CURRENT_INSTALLED_DIR}/Media/HLMS/Blendfunctions_piece_fs.glslt")
+  OR (EXISTS "${CURRENT_INSTALLED_DIR}/include/OGRE/OgreNode.h")
     message(FATAL_ERROR "FATAL ERROR: ogre-next-223 and ogre are incompatible.")
 endif()
 
