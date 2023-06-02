@@ -17,6 +17,7 @@ vcpkg_from_github(
     PATCHES
         toolchain_fixes.patch
         fix_find_package_sdl2.patch
+        find_freetype.patch
         debug_overlay.patch
 )
 
