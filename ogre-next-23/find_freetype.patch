@@ -1,0 +1,15 @@
+diff --git a/CMake/Packages/FindFreetype.cmake b/CMake/Packages/FindFreetype.cmake
+index 1fdad4f35c..0698ea838b 100644
+--- a/CMake/Packages/FindFreetype.cmake
++++ b/CMake/Packages/FindFreetype.cmake
+@@ -57,5 +57,10 @@ if (FREETYPE_FT2BUILD_INCLUDE_DIR AND NOT FREETYPE_FT2BUILD_INCLUDE_DIR STREQUAL
+   set(FREETYPE_INCLUDE_DIRS ${FREETYPE_INCLUDE_DIRS} ${FREETYPE_FT2BUILD_INCLUDE_DIR})
+ endif ()
+
++# Populate FREETYPE_FOUND if pkgc module was fine
++if (NOT FREETYPE_FOUND AND FREETYPE_PKGC_FOUND)
++  set(FREETYPE_FOUND FREETYPE_PKGC_FOUND)
++endif()
++
+ # Reset framework finding
+ set(CMAKE_FIND_FRAMEWORK "FIRST")
