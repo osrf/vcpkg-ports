@@ -8,7 +8,7 @@ index 1fdad4f35c..0698ea838b 100644
  
 +# Populate FREETYPE_FOUND if pkgc module was fine
 +if (NOT FREETYPE_FOUND AND FREETYPE_PKGC_FOUND)
-+  set(FREETYPE_FOUND FREETYPE_PKGC_FOUND)
++  set(FREETYPE_FOUND ${FREETYPE_PKGC_FOUND})
 +endif()
 +
  # Reset framework finding
