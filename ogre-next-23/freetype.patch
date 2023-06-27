@@ -1,0 +1,27 @@
+Patch Freetype detection
+
+Needed for building the Overlay component the freetype
+detection in Ogre-next 2.3 when using pkg-config.
+
+
+diff --git a/CMake/Packages/FindFreetype.cmake b/CMake/Packages/FindFreetype.cmake
+index 1fdad4f35c..a9970e6d60 100644
+--- a/CMake/Packages/FindFreetype.cmake
++++ b/CMake/Packages/FindFreetype.cmake
+@@ -57,5 +57,15 @@ if (FREETYPE_FT2BUILD_INCLUDE_DIR AND NOT FREETYPE_FT2BUILD_INCLUDE_DIR STREQUAL
+   set(FREETYPE_INCLUDE_DIRS ${FREETYPE_INCLUDE_DIRS} ${FREETYPE_FT2BUILD_INCLUDE_DIR})
+ endif ()
+ 
+++# Populate FREETYPE_FOUND and FREETYPE_LIBRARIES if pkgc module found them and they are not set already
++if (NOT FREETYPE_FOUND AND FREETYPE_PKGC_FOUND)
++  set(FREETYPE_FOUND ${FREETYPE_PKGC_FOUND})
++  if (NOT FREETYPE_LIBRARIES AND FREETYPE_LIBRARY_REL)
++    set(FREETYPE_LIBRARIES 
++      optimized ${FREETYPE_LIBRARY_REL}
++      debug ${FREETYPE_LIBRARY_DBG})
++  endif()
++endif()
++
+ # Reset framework finding
+ set(CMAKE_FIND_FRAMEWORK "FIRST")
+
