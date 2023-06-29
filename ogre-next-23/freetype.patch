@@ -12,7 +12,7 @@ index 1fdad4f35c..a9970e6d60 100644
    set(FREETYPE_INCLUDE_DIRS ${FREETYPE_INCLUDE_DIRS} ${FREETYPE_FT2BUILD_INCLUDE_DIR})
  endif ()
  
-++# Populate FREETYPE_FOUND and FREETYPE_LIBRARIES if pkgc module found them and they are not set already
++# Populate FREETYPE_FOUND and FREETYPE_LIBRARIES if pkgc module found them and they are not set already
 +if (NOT FREETYPE_FOUND AND FREETYPE_PKGC_FOUND)
 +  set(FREETYPE_FOUND ${FREETYPE_PKGC_FOUND})
 +  if (NOT FREETYPE_LIBRARIES AND FREETYPE_LIBRARY_REL)
